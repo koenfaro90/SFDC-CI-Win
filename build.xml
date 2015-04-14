@@ -1,0 +1,42 @@
+<project name="Salesforce CI jobs" default="info" basedir="." xmlns:sf="antlib:com.salesforce">
+    
+    <tstamp><format property="TIMESTAMP" pattern="yyyyMMdd"/></tstamp>
+
+    <!-- Get RETRIEVEPACKAGE metadata of org to the Retrieved folder -->
+    <target name="getMetadata">
+        <antcall target="info" />
+        <!-- Retrieve the contents listed in package.xml into the tmp directory -->
+        <sf:retrieve    username="${SFUSER}"
+                        password="${SFPWTOKEN}" 
+                        serverurl="${SFSERVER}" 
+                        retrieveTarget="${TARGETDIR}" 
+                        unpackaged="${RETRIEVEPACKAGE}"/>
+    </target>
+
+    <!-- Deploy to destination org from package folder -->
+    <target name="deployPackage">
+        <property name="tmpDir" location="${PACKAGEFOLDER}\..\tmpDeployDir" relative="false" />
+        <antcall target="info" />
+        <sf:deploy  username="${SFUSER}" 
+                    password="${SFPWTOKEN}" 
+                    serverurl="${SFSERVER}" 
+                    deployRoot="${PACKAGEFOLDER}"
+                    rollbackOnError="true"
+                    checkOnly="${SFCHECKONLY}"
+                    runAllTests="false"
+                    pollWaitMillis="5000"
+                    maxPoll="200" />
+    </target>
+
+    <!-- Print some settings -->
+    <target name="info">
+        <echo message="Basedir: ${basedir}" />
+        <echo message="TARGETDIR: ${TARGETDIR}" />
+        <echo message="SFUSER: ${SFUSER}" />
+        <echo message="SFSERVER: ${SFSERVER}" />
+        <echo message="PACKAGEFOLDER: ${PACKAGEFOLDER}" />
+        <echo message="RETRIEVEPACKAGE: ${RETRIEVEPACKAGE}" />
+        <echo message="SFCHECKONLY: ${SFCHECKONLY}" />
+    </target>
+
+</project>

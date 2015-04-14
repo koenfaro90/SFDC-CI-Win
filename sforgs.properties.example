@@ -1,0 +1,10 @@
+
+# Project should reside in folder with name same as PROJECTNAME
+# The project should be under Git version control
+# Second parameter env should be same as Git Branche name
+# Eg. Folder: C:\Dev\PROJECTNAME with branch "feature1" will look for the following properties"
+
+PROJECTNAME.feature1.SFUSER=<salesforce username>
+PROJECTNAME.feature1.SFPASSWORD=<salesforce password+token>
+PROJECTNAME.feature1.SFSERVER=https://test.salesforce.com
+PROJECTNAME.feature1.SFINSTANCE=https://cs6.salesforce.com

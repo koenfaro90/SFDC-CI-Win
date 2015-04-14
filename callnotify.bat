@@ -1,0 +1,6 @@
+ECHO %HR2%
+ECHO %ATT%
+ECHO %ATT%	%~1
+ECHO %ATT%
+ECHO %HR2%
+

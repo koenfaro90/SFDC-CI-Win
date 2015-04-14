@@ -1,0 +1,6 @@
+# General properties template file
+SCRIPTDIR=C:\Bin
+DEVDIR=C:\Dev
+TMPDIR=C:\Tmp
+LOGDIR=C:\Log
+SFCREDSTORE= C:\Bin\sforgs.properties
