@@ -1,9 +1,21 @@
 @echo off
 setlocal ENABLEDELAYEDEXPANSION
-
 :: Get general properties
 SET RUNSCRIPT=Update
-call getSettings.bat
+:: Setting defaults
+SET WORKDIR=%cd%
+:: Asume folder name == Project name
+SET "CDIR=%WORKDIR:~0%"
+FOR %%i IN ("%CDIR%") DO SET "REQPROJ=%%~nxi"
+IF NOT [%1]==[] ( 
+	SET REQENV=%1
+)
+IF NOT [%REQENV%]==[] (
+	call getSettings.bat %REQPROJ% %REQENV%
+) ELSE (
+	call getSettings.bat
+)
+
 if "%errorlevel%"=="1" goto missingsettings
 call callinfo.bat
 
