@@ -1,0 +1,18 @@
+{
+  "name": "sfdc-ci-win-cleanup",
+  "version": "1.0.0",
+  "description": "Clean's up certain SF metadata after update",
+  "main": "clean.js",
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "xml2js": "^0.4.15",
+    "underscore": "^1.8.3",
+    "yargs": "^3.31.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Koen Faro",
+  "license": "ISC"
+}

@@ -48,6 +48,10 @@ IF EXIST %WORKDIR%\%SRCFOLDER% (
 xcopy %TMPSRC% %WORKDIR%\%SRCFOLDER% /s/e/h/i/q > NUL
 IF EXIST %TMPSRC% rmdir %TMPSRC% /s/q
 call wait.bat
+
+call clean %CLEANUP%
+call wait.bat
+
 goto done
 
 :missingpackagefile
