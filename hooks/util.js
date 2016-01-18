@@ -23,6 +23,22 @@ util.prototype = {
 			});
 		})
 	},
+	performOperationOnFolderSequence: function(path, operation) {
+		var me = this;
+		return new Promise(function(resolve, reject) {
+			var list = [];
+			fs.readdir(path, function(err, result) {
+				for (var x in result) {
+					list.push(operation.bind(null, path + '\\' + result[x]));
+				}
+				me.sequence(list).then(function() {
+					resolve();
+				}).catch(function(err) {
+					reject(err);
+				})
+			});
+		})
+	},
 	sequence: function(tasks) {
 		var current = Promise.cast(), results = [];
 		for (var k = 0; k < tasks.length; ++k) {

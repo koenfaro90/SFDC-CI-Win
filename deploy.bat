@@ -10,6 +10,8 @@ call getSettings.bat %1 %2
 if "%errorlevel%"=="1" goto missingsettings
 call callinfo.bat
 
+IF "%HOOK%"=="" (SET DEPLOYHOOKCONFIG=) ELSE (SET DEPLOYHOOKCONFIG=%HOOK%)
+
 ECHO *********************************************************************************************************
 ECHO * This will DEPLOY package %WORKDIR%\%SRCFOLDER% to org: %SFCONTEXT% (user: %SFUSER%)
 ECHO *********************************************************************************************************
@@ -17,13 +19,13 @@ ECHO:
 SET /P ANSWER=Perform Checkonly Deploy? ("Y" CheckOnly deploy, no changes will be made to org. "N" Ok to make changes) (Y/N)
 if /i {%ANSWER%}=={n} Set CHECKONLY=FALSE
 ECHO:
-IF {%CHECKONLY%}=={FALSE} SET /P ANSWER=*** ABOUT TO MAKE CHANGES TO %SFCONTEXT% *** Are you sure? (Y/N) 
+IF {%CHECKONLY%}=={FALSE} SET /P ANSWER=*** ABOUT TO MAKE CHANGES TO %SFCONTEXT% *** Are you sure? (Y/N)
 if /i {%ANSWER%}=={y} goto :run
 goto :end
 
 :run
 Echo Please wait...
-call deployMetadata %SFUSER% %SFPASSWORD% %SFSERVER% %WORKDIR%\%SRCFOLDER% %BUILDXML% %TMPLOGFILE% %CHECKONLY%
+call deployMetadata %SFUSER% %SFPASSWORD% %SFSERVER% %WORKDIR%\%SRCFOLDER% %BUILDXML% %TMPLOGFILE% %CHECKONLY% %DEPLOYHOOKCOMMAND%
 set antcallresult=%errorlevel%
 IF NOT "%antcallresult%"=="0" goto anterror
 goto done

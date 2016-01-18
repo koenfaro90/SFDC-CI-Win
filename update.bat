@@ -7,7 +7,7 @@ SET WORKDIR=%cd%
 :: Asume folder name == Project name
 SET "CDIR=%WORKDIR:~0%"
 FOR %%i IN ("%CDIR%") DO SET "REQPROJ=%%~nxi"
-IF NOT [%1]==[] ( 
+IF NOT [%1]==[] (
 	SET REQENV=%1
 )
 IF NOT [%REQENV%]==[] (
@@ -26,7 +26,7 @@ IF NOT "%GITSTATUS%"=="clean" GOTO notclean
 ECHO Description:	^^!^^!^^! This will fetch %SFCONTEXT% metadata and overwrite %WORKDIR%\%SRCFOLDER% (Branch: %GITBRANCH%)
 ECHO %HR%
 ECHO:
-SET /P ANSWER=%ATT%	Overwrite branch ^>^> %GITBRANCH% ^<^< with %SFCONTEXT% ? (Y/N) 
+SET /P ANSWER=%ATT%	Overwrite branch ^>^> %GITBRANCH% ^<^< with %SFCONTEXT% ? (Y/N)
 ECHO:
 if /i {%ANSWER%}=={y} goto run
 set ERRORMSG=Update aborted
@@ -49,7 +49,7 @@ xcopy %TMPSRC% %WORKDIR%\%SRCFOLDER% /s/e/h/i/q > NUL
 IF EXIST %TMPSRC% rmdir %TMPSRC% /s/q
 call wait.bat
 
-call clean %CLEANUP%
+call hook_update %HOOK%
 call wait.bat
 
 goto done

@@ -5,7 +5,7 @@ var fs = require('fs'),
     Promise = require('bluebird'),
 	allConfigs = JSON.parse(fs.readFileSync(__dirname + '/config.json').toString()),
 	util = require(__dirname  + '/util.js'),
-	argv = require('yargs').usage('Usage: clean.js  [options]')
+	argv = require('yargs').usage('Usage: hooks.js  [options]')
 						    .demand('c')
 						    .alias('c', 'config')
 						    .nargs('c', 1)
@@ -15,6 +15,11 @@ var fs = require('fs'),
 						    .alias('p', 'path')
 						    .nargs('p', 1)
 						    .describe('p', 'Path')
+							.demand('s')
+						    .alias('s', 'stage')
+						    .nargs('s', 1)
+						    .describe('s', 'Stage')
+							.choices('s', ['update', 'deploy'])
 						    .epilog('Copyright 2015')
 						    .argv;
 
@@ -30,13 +35,26 @@ process.on('unhandledRejecction', function(reason, p) {
 
 /* Arguments */
 var selectedConfig = argv.config,
-	path = argv.path;
+	path = argv.path,
+	stage = argv.stage;
 
 var config = allConfigs[selectedConfig];
 
+if (config == undefined || config == null) {
+	console.error('The configuration you have specified (' + selectedConfig + ') did not exist');
+	process.exit();
+}
+
+var stageConfig = config[stage];
+
+if (stageConfig == undefined || stageConfig == null) {
+	console.error('The configuration you have specified (' + selectedConfig + ') exists but does not have a configuration for the selected stage: ', stage);
+	process.exit();
+}
+
 var actionPromiseList = [];
-for (var x in config.actions) {
-	var action = config.actions[x];
+for (var x in stageConfig.actions) {
+	var action = stageConfig.actions[x];
 	try {
 		var mod = require(__dirname + '/modules/' + action.module);
 		actionPromiseList.push(mod.bind(null, path + '\\', action.path, action.arguments));
@@ -48,8 +66,18 @@ for (var x in config.actions) {
 	}
 }
 
-util.sequence(actionPromiseList).then(function(results) {
-	console.log('Done processing actions');
-}).catch(function(err) {
-	console.error('Error', err);
-});
+run(actionPromiseList);
+
+function run(promiseList) {
+	util.sequence(actionPromiseList).then(function(results) {
+		console.log('Done processing actions');
+	}).catch(function(err) {
+		console.error('Error', err);
+		if (err == 'RESTART') {
+			run(promiseList);
+		} else {
+			console.log('Exiting');
+			process.exit(1);
+		}
+	});
+}

@@ -1,5 +1,5 @@
 <project name="Salesforce CI jobs" default="info" basedir="." xmlns:sf="antlib:com.salesforce">
-    
+
     <tstamp><format property="TIMESTAMP" pattern="yyyyMMdd"/></tstamp>
 
     <!-- Get RETRIEVEPACKAGE metadata of org to the Retrieved folder -->
@@ -7,9 +7,9 @@
         <antcall target="info" />
         <!-- Retrieve the contents listed in package.xml into the tmp directory -->
         <sf:retrieve    username="${SFUSER}"
-                        password="${SFPWTOKEN}" 
-                        serverurl="${SFSERVER}" 
-                        retrieveTarget="${TARGETDIR}" 
+                        password="${SFPWTOKEN}"
+                        serverurl="${SFSERVER}"
+                        retrieveTarget="${TARGETDIR}"
                         unpackaged="${RETRIEVEPACKAGE}"/>
     </target>
 
@@ -17,9 +17,9 @@
     <target name="deployPackage">
         <property name="tmpDir" location="${PACKAGEFOLDER}\..\tmpDeployDir" relative="false" />
         <antcall target="info" />
-        <sf:deploy  username="${SFUSER}" 
-                    password="${SFPWTOKEN}" 
-                    serverurl="${SFSERVER}" 
+        <sf:deploy  username="${SFUSER}"
+                    password="${SFPWTOKEN}"
+                    serverurl="${SFSERVER}"
                     deployRoot="${PACKAGEFOLDER}"
                     rollbackOnError="true"
                     checkOnly="${SFCHECKONLY}"
