@@ -1,0 +1,115 @@
+{
+	"SFECG": {
+		"update": {
+			"actions": [
+				{
+					"module": "xmlRemoveListed",
+					"path": "src\\profiles",
+					"arguments": {
+						"layoutAssignments": [
+							{"layout": "SocialPost-Social Post Layout"},
+							{"layout": "FeedItem-Feed Item Layout"}
+						],
+						"userPermissions": [
+							{"name": "EditBillingInfo"},
+							{"name": "ManageSandboxes"}
+						]
+					}
+				},
+				{
+					"module": "xmlRemoveListedSimple",
+					"path": "src\\networks",
+					"arguments": [
+						"picassoSite"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\layouts",
+					"arguments": [
+						"SocialPost-Social Post Layout.layout"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\connectedApps",
+					"arguments": [
+						"FIQAS_Integration.connectedApp"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\samlssoconfigs",
+					"arguments": [
+						"EBAYK.samlssoconfig"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"SocialPost.workflow"
+					]
+				},
+				{
+					"module": "xmlRemoveFalsy",
+					"path": "src\\profiles",
+					"arguments": {}
+				},
+				{
+					"module": "xmlRemoveFalsy",
+					"path": "src\\permissionsets",
+					"arguments": {}
+				}
+			]
+		},
+		"deploy": {
+			"actions": [
+				{
+					"module": "updateEmptyFiles",
+					"path": "profiles",
+					"arguments": {
+						"emptyFile": "\\..\\empty-files\\Empty.profile",
+						"replaceTags": {
+							"userLicense": "!USERLICENSE!",
+							"label": "!LABEL!"
+						}
+					}
+				},
+				{
+					"module": "rebaseOnEmptyXml",
+					"path": "profiles",
+					"arguments": {
+						"rebaseOnto": "\\..\\empty-files\\Empty.profile",
+						"replaceTags": {
+							"userLicense": "!USERLICENSE!",
+							"label": "!LABEL!"
+						}
+					}
+				},
+				{
+					"module": "updateEmptyFiles",
+					"path": "permissionsets",
+					"arguments": {
+						"emptyFile": "\\..\\empty-files\\Empty.permissionset",
+						"replaceTags": {
+							"userLicense": "!USERLICENSE!",
+							"label": "!LABEL!"
+						}
+					}
+				},
+				{
+					"module": "rebaseOnEmptyXml",
+					"path": "permissionsets",
+					"arguments": {
+						"rebaseOnto": "\\..\\empty-files\\Empty.permissionset",
+						"replaceTags": {
+							"userLicense": "!USERLICENSE!",
+							"label": "!LABEL!"
+						}
+					}
+				}
+			]
+		}
+	}
+}

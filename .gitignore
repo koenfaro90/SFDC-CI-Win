@@ -1,4 +1,4 @@
 mountCredStore.bat
 local.properties
 sforgs.properties
-cleanup/node_modules/
+hooks/node_modules

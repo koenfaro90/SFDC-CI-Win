@@ -1,8 +1,8 @@
 {
-  "name": "sfdc-ci-win-cleanup",
+  "name": "sfdc-ci-win-hooks",
   "version": "1.0.0",
-  "description": "Clean's up certain SF metadata after update",
-  "main": "clean.js",
+  "description": "Execute certain hooks steps",
+  "main": "hooks.js",
   "dependencies": {
     "bluebird": "^3.0.6",
     "xml2js": "^0.4.15",

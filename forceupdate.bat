@@ -9,7 +9,7 @@ SET WORKDIR=%cd%
 :: Asume folder name == Project name
 SET "CDIR=%WORKDIR:~0%"
 FOR %%i IN ("%CDIR%") DO SET "REQPROJ=%%~nxi"
-IF NOT [%1]==[] ( 
+IF NOT [%1]==[] (
 	SET REQENV=%1
 )
 IF NOT [%REQENV%]==[] (
@@ -32,7 +32,7 @@ IF NOT "%GITSTATUS%"=="clean" (
 )
 ECHO %HR%
 ECHO:
-SET /P ANSWER=%ATT%	Overwrite branch ^>^> %GITBRANCH% ^<^< with %SFCONTEXT% ? (Y/N) 
+SET /P ANSWER=%ATT%	Overwrite branch ^>^> %GITBRANCH% ^<^< with %SFCONTEXT% ? (Y/N)
 ECHO:
 if /i {%ANSWER%}=={y} goto run
 set ERRORMSG=Update aborted
@@ -53,6 +53,9 @@ IF EXIST %WORKDIR%\%SRCFOLDER% (
 	call wait.bat
 )
 xcopy %TMPSRC% %WORKDIR%\%SRCFOLDER% /s/e/h/i/q
+
+call hook_update %HOOK%
+call wait.bat
 
 goto done
 
