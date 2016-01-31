@@ -113,5 +113,80 @@
 				}
 			]
 		}
+	},
+	"Generic": {
+		"update": {
+			"actions": [
+				{
+					"module": "xmlRemoveListed",
+					"path": "src\\profiles",
+					"arguments": {
+						"layoutAssignments": [
+							{"layout": "SocialPost-Social Post Layout"},
+							{"layout": "FeedItem-Feed Item Layout"}
+						],
+						"userPermissions": [
+							{"name": "EditBillingInfo"},
+							{"name": "ManageSandboxes"}
+						]
+					}
+				},
+				{
+					"module": "xmlRemoveListedSimple",
+					"path": "src\\networks",
+					"arguments": [
+						"picassoSite"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\layouts",
+					"arguments": [
+						"FeedItem-Feed Item Layout"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\layouts",
+					"arguments": [
+						"SocialPost-Social Post Layout.layout"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"SocialPost.workflow"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"Question.workflow"
+					]
+				},
+								{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"Reply.workflow"
+					]
+				},
+				{
+					"module": "xmlRemoveFalsy",
+					"path": "src\\profiles",
+					"arguments": {}
+				},
+				{
+					"module": "xmlRemoveFalsy",
+					"path": "src\\permissionsets",
+					"arguments": {}
+				}
+			]
+		},
+		"deploy": {
+			"actions": []
+		}
 	}
 }
