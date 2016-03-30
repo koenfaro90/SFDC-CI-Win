@@ -150,7 +150,9 @@
 						],
 						"userPermissions": [
 							{"name": "EditBillingInfo"},
-							{"name": "ManageSandboxes"}
+							{"name": "ManageSandboxes"},
+							{"name": "ImportCustomObjects"},
+							{"name": "ManageSynonyms"}
 						]
 					}
 				},
@@ -186,10 +188,24 @@
 					"module": "deleteFile",
 					"path": "src\\workflows",
 					"arguments": [
+						"FeedItem.workflow"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"AssistantProgress.workflow"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
 						"Question.workflow"
 					]
 				},
-								{
+				{
 					"module": "deleteFile",
 					"path": "src\\workflows",
 					"arguments": [
