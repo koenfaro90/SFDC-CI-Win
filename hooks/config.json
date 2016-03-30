@@ -12,7 +12,9 @@
 						],
 						"userPermissions": [
 							{"name": "EditBillingInfo"},
-							{"name": "ManageSandboxes"}
+							{"name": "ManageSandboxes"},
+							{"name": "ImportCustomObjects"},
+							{"name": "ManageSynonyms"}
 						]
 					}
 				},
@@ -46,9 +48,30 @@
 				},
 				{
 					"module": "deleteFile",
+					"path": "src\\samlssoconfigs",
+					"arguments": [
+						"CORP.samlssoconfig"
+					]
+				},
+				{
+					"module": "deleteFile",
 					"path": "src\\workflows",
 					"arguments": [
 						"SocialPost.workflow"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"FeedItem.workflow"
+					]
+				},
+				{
+					"module": "deleteFile",
+					"path": "src\\workflows",
+					"arguments": [
+						"AssistantProgress.workflow"
 					]
 				},
 				{
@@ -94,7 +117,8 @@
 						"emptyFile": "\\..\\empty-files\\Empty.permissionset",
 						"replaceTags": {
 							"userLicense": "!USERLICENSE!",
-							"label": "!LABEL!"
+							"label": "!LABEL!",
+							"description": "!DESCRIPTION!"
 						}
 					}
 				},
@@ -105,7 +129,8 @@
 						"rebaseOnto": "\\..\\empty-files\\Empty.permissionset",
 						"replaceTags": {
 							"userLicense": "!USERLICENSE!",
-							"label": "!LABEL!"
+							"label": "!LABEL!",
+							"description": "!DESCRIPTION!"
 						}
 					}
 				}
