@@ -96,6 +96,14 @@
 						"replaceTags": {
 							"userLicense": "!USERLICENSE!",
 							"label": "!LABEL!"
+						},
+						"ignore": {
+							"userPermissions": [
+								"EditBillingInfo",
+								"ManageSandboxes",
+								"ImportCustomObjects",
+								"ManageSynonyms"
+							]
 						}
 					}
 				},
@@ -107,6 +115,14 @@
 						"replaceTags": {
 							"userLicense": "!USERLICENSE!",
 							"label": "!LABEL!"
+						},
+						"ignore": {
+							"userPermissions": [
+								"EditBillingInfo",
+								"ManageSandboxes",
+								"ImportCustomObjects",
+								"ManageSynonyms"
+							]
 						}
 					}
 				},
@@ -119,6 +135,14 @@
 							"userLicense": "!USERLICENSE!",
 							"label": "!LABEL!",
 							"description": "!DESCRIPTION!"
+						},
+						"ignore": {
+							"userPermissions": [
+								"EditBillingInfo",
+								"ManageSandboxes",
+								"ImportCustomObjects",
+								"ManageSynonyms"
+							]
 						}
 					}
 				},
@@ -131,6 +155,14 @@
 							"userLicense": "!USERLICENSE!",
 							"label": "!LABEL!",
 							"description": "!DESCRIPTION!"
+						},
+						"ignore": {
+							"userPermissions": [
+								"EditBillingInfo",
+								"ManageSandboxes",
+								"ImportCustomObjects",
+								"ManageSynonyms"
+							]
 						}
 					}
 				}

@@ -97,8 +97,15 @@ function action(root, path, args) {
 									}
 								}
 							}
+							
+							var ignoreLength = 0;
+							for (var x in args.ignore) {
+								for (var y in args.ignore[x]) {
+									ignoreLength++;
+								} 
+							}
 
-							if (foundIndexes.length == jsonToFind.length || foundIndexes.length > jsonToFind.length) {
+							if (foundIndexes.length + ignoreLength == jsonToFind.length || foundIndexes.length + ignoreLength > jsonToFind.length) {
 								var builder = new xml2js.Builder();
 								var xml = util.convertToSFCompliantXML(builder.buildObject(copyEmptyFile));
 								fs.writeFile(filename, xml, function(err, result) {

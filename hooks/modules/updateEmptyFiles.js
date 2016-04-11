@@ -48,10 +48,19 @@ function action(root, path, args) {
 												//console.log('updateEmptyFiles', filename, y);
 												//toFind = JSON.stringify(args.replaceTags[y]);
 											} else {
-												toFind = JSON.stringify(record);
-												toFind = toFind.replace(/true/g, 'false');
-												toFind = toFind.replace(/DefaultOn/g, 'DefaultOff');
-												toReplace = toFind;
+												var ignore = false;
+												if (args.ignore[y] != undefined) {
+													if (args.ignore[y].indexOf(record.name[0]) != -1) {
+														console.log('FOUND!');
+														ignore = true;
+													}
+												}
+												if (ignore == false) {
+													toFind = JSON.stringify(record);
+													toFind = toFind.replace(/true/g, 'false');
+													toFind = toFind.replace(/DefaultOn/g, 'DefaultOff');
+													toReplace = toFind;
+												}
 											}
 										}
 										if (toFind != null) {
@@ -86,6 +95,7 @@ function action(root, path, args) {
 							var foundNewProperties = false;
 							for (var i = 0; i < jsonToFind.length; i++) {
 								if (foundIndexes.indexOf(i) == -1 && findOriginMap[i]['y'] != 'label' && findOriginMap[i]['y'] != 'userLicense' && findOriginMap[i]['y'] != '$') {
+									
 									// The string we are looking for because it was in the currentFile was not found in the emptyFile
 									//console.log('Didnt find', jsonToFind[i], findOriginMap[i]);
 									// This means we add it into the empty profile with everything set to false and re-run
