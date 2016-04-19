@@ -15,7 +15,7 @@ var keepWithProperty = {
   allowRead: 'true',
   modifyAllRecords: 'true',
   viewAllRecords: 'true',
-  visibility: 'DefaultOn'
+  visibility: ['DefaultOn', 'Available', 'Visible']
 }
 
 var deleteWithContent = [
@@ -58,8 +58,14 @@ function action(root, path, args) {
 								}
 								for (var a in keepWithProperty) {
 									if (record[a] != undefined) {
-										if (record[a] == keepWithProperty[a]) {
-										  	keep = true;
+										if (typeof keepWithProperty[a] == "object") {
+											if (keepWithProperty[a].indexOf(record[a][0]) > -1) {
+												keep = true;
+											}
+										} else {
+											if (record[a] == keepWithProperty[a]) {
+												keep = true;
+											}
 										}
 									}
 								}
